@@ -19,16 +19,15 @@ Este repositorio ya incluye:
 
 ## Stack Tecnico
 
-- Java 21
-- Spring Boot 3.4.4
-- Spring Web, Spring Data JPA, Spring Security, Spring HATEOAS
+- Java 25
+- Spring Boot 4.0.4
+- Spring Web, Spring Data JPA, Spring Security
 - JWT (jjwt)
-- PostgreSQL (Neon)
+- PostgreSQL
 - Flyway
 - Springdoc OpenAPI (Swagger UI)
 - Actuator + Prometheus
 - Maven Wrapper
-- Arquitectura en capas
 
 ## Estructura Principal
 
@@ -70,13 +69,6 @@ Notas:
 - La conexion a BD esta definida en `application.properties` para entorno de desarrollo.
 - Para despliegue real, se recomienda sobreescribir credenciales por variables de entorno (`SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, `SPRING_DATASOURCE_PASSWORD`).
 
-## Variables de entorno requeridas
-
-- `SPRING_DATASOURCE_URL`
-- `DATASOURCE_USERNAME`
-- `DATASOURCE_PASSWORD`
-- `APP_JWT_SECRET`
-
 ## Ejecutar Proyecto
 
 ### Windows (PowerShell)
@@ -98,11 +90,6 @@ La API queda disponible en:
 - Base URL: `http://localhost:8080`
 - Swagger UI: `http://localhost:8080/swagger`
 - OpenAPI JSON: `http://localhost:8080/v3/api-docs`
-
-Produccion:
-
-- Base URL: `https://banco-digital-backend-u3ts.onrender.com`
-- Swagger UI: `https://banco-digital-backend-u3ts.onrender.com/swagger-ui.html`
 
 ## Migraciones con Flyway
 
