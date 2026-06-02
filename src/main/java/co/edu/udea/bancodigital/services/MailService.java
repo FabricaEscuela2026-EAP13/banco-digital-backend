@@ -32,7 +32,7 @@ public class MailService {
             log.info("Simple email sent successfully to: {}", to);
         } catch (Exception e) {
             log.error("Error sending simple email to {}: {}", to, e.getMessage());
-            throw new RuntimeException("Error sending email", e);
+            throw new IllegalArgumentException("Error sending email", e);
         }
     }
 
@@ -51,7 +51,7 @@ public class MailService {
             log.info("HTML email sent successfully to: {}", to);
         } catch (MessagingException e) {
             log.error("Error sending HTML email to {}: {}", to, e.getMessage());
-            throw new RuntimeException("Error sending email", e);
+            throw new IllegalArgumentException("Error sending email", e);
         }
     }
 
@@ -165,7 +165,7 @@ public class MailService {
             log.info("Email with {} attachment(s) sent successfully to: {}", attachments.size(), to);
         } catch (MessagingException e) {
             log.error("Error sending email with attachments to {}: {}", to, e.getMessage());
-            throw new RuntimeException("Error sending email with attachments", e);
+            throw new IllegalArgumentException("Error sending email with attachments", e);
         }
     }
 }

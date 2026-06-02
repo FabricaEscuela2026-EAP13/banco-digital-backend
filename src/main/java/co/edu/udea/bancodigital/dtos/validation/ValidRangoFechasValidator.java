@@ -12,6 +12,7 @@ public class ValidRangoFechasValidator implements ConstraintValidator<ValidRango
 
     @Override
     public void initialize(ValidRangoFechas constraintAnnotation) {
+        // No initialization needed
     }
 
     @Override

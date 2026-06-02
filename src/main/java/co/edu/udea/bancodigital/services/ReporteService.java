@@ -82,7 +82,7 @@ public class ReporteService {
             log.info("Reporte de movimientos enviado exitosamente a: {}", usuario.getCorreo());
         } catch (Exception e) {
             log.error("Error enviando reporte por email a {}: {}", usuario.getCorreo(), e.getMessage(), e);
-            throw new RuntimeException("Error enviando reporte por email", e);
+            throw new IllegalArgumentException("Error enviando reporte por email", e);
         }
     }
 

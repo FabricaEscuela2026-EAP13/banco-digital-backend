@@ -28,12 +28,12 @@ public interface CuentaRepository extends JpaRepository<Cuenta, UUID> {
 	 * @return lista de cuentas del usuario
 	 */
 	@Query("""
-	        SELECT c FROM Cuenta c
-	        JOIN FETCH c.tipoCuenta tc
-	        JOIN FETCH c.estadoCuenta ec
-	        JOIN c.dueno u
-	        WHERE u.correo = :correo
-	        """)
+		SELECT c FROM Cuenta c
+		JOIN FETCH c.tipoCuenta tc
+		JOIN FETCH c.estadoCuenta ec
+		JOIN c.dueno u
+		WHERE u.correo = :correo
+		""")
 	List<Cuenta> findAllByDuenoCorreo(@Param("correo") String correo);
 
 	/**
@@ -42,21 +42,21 @@ public interface CuentaRepository extends JpaRepository<Cuenta, UUID> {
 	 * @return lista de cuentas con dueno, tipo de documento, tipo de cuenta y estado
 	 */
 	@Query("""
-	        SELECT c FROM Cuenta c
-	        JOIN FETCH c.dueno u
-	        JOIN FETCH u.tipoDocumento td
-	        JOIN FETCH c.tipoCuenta tc
-	        JOIN FETCH c.estadoCuenta ec
-	        """)
+		SELECT c FROM Cuenta c
+		JOIN FETCH c.dueno u
+		JOIN FETCH u.tipoDocumento td
+		JOIN FETCH c.tipoCuenta tc
+		JOIN FETCH c.estadoCuenta ec
+		""")
 	List<Cuenta> findAllForAdmin();
 
 	@Query("""
-	        SELECT c FROM Cuenta c
-	        JOIN FETCH c.dueno u
-	        JOIN FETCH c.estadoCuenta ec
-	        JOIN FETCH c.tipoCuenta tc
-	        WHERE c.idCuenta = :idCuenta
-	        """)
+		SELECT c FROM Cuenta c
+		JOIN FETCH c.dueno u
+		JOIN FETCH c.estadoCuenta ec
+		JOIN FETCH c.tipoCuenta tc
+		WHERE c.idCuenta = :idCuenta
+		""")
 	Optional<Cuenta> findByIdCuentaConDueno(@Param("idCuenta") UUID idCuenta);
 
 	/**
@@ -66,12 +66,12 @@ public interface CuentaRepository extends JpaRepository<Cuenta, UUID> {
 	 * @return la cuenta con dueno, estado y tipo si existe
 	 */
 	@Query("""
-	        SELECT c FROM Cuenta c
-	        JOIN FETCH c.dueno u
-	        JOIN FETCH c.estadoCuenta ec
-	        JOIN FETCH c.tipoCuenta tc
-	        WHERE c.idCuenta = :idCuenta
-	        """)
+		SELECT c FROM Cuenta c
+		JOIN FETCH c.dueno u
+		JOIN FETCH c.estadoCuenta ec
+		JOIN FETCH c.tipoCuenta tc
+		WHERE c.idCuenta = :idCuenta
+		""")
 	Optional<Cuenta> findByIdWithDuenoEstadoAndTipo(@Param("idCuenta") UUID idCuenta);
 
 	/**
@@ -83,9 +83,9 @@ public interface CuentaRepository extends JpaRepository<Cuenta, UUID> {
 	 */
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	@Query("""
-	        SELECT c FROM Cuenta c
-	        WHERE c.idCuenta = :idCuenta
-	        """)
+		SELECT c FROM Cuenta c
+		WHERE c.idCuenta = :idCuenta
+		""")
 	Optional<Cuenta> findByIdForUpdate(@Param("idCuenta") UUID idCuenta);
 
 	/**
@@ -97,10 +97,10 @@ public interface CuentaRepository extends JpaRepository<Cuenta, UUID> {
 	 */
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	@Query("""
-	        SELECT c FROM Cuenta c
-	        WHERE c.idCuenta IN :idsCuenta
-	        ORDER BY c.idCuenta
-	        """)
+		SELECT c FROM Cuenta c
+		WHERE c.idCuenta IN :idsCuenta
+		ORDER BY c.idCuenta
+		""")
 	List<Cuenta> findAllByIdCuentaInForUpdate(@Param("idsCuenta") List<UUID> idsCuenta);
 
 	/**
@@ -118,11 +118,11 @@ public interface CuentaRepository extends JpaRepository<Cuenta, UUID> {
 	 * @return true si la cuenta existe y su estado es ACTIVA
 	 */
 	@Query("""
-	        SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END
-	        FROM Cuenta c
-	        JOIN c.estadoCuenta ec
-	        WHERE c.idCuenta = :idCuenta
-	          AND UPPER(ec.nombre) = 'ACTIVA'
-	        """)
+		SELECT CASE WHEN COUNT(c) > 0 THEN true ELSE false END
+		FROM Cuenta c
+		JOIN c.estadoCuenta ec
+		WHERE c.idCuenta = :idCuenta
+		  AND UPPER(ec.nombre) = 'ACTIVA'
+		""")
 	boolean existsByIdCuentaAndEstadoActiva(@Param("idCuenta") UUID idCuenta);
 }

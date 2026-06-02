@@ -33,7 +33,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 
 import co.edu.udea.bancodigital.dtos.responses.DetalleTransaccionResponse;
-import co.edu.udea.bancodigital.dtos.responses.HistorialTransaccionResponse;
 import co.edu.udea.bancodigital.dtos.responses.HistorialTransaccionesResponse;
 import co.edu.udea.bancodigital.exception.EntityNotFoundException;
 import co.edu.udea.bancodigital.models.entities.Cuenta;

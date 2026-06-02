@@ -29,9 +29,11 @@ import co.edu.udea.bancodigital.repositories.TipoTransaccionRepository;
 import co.edu.udea.bancodigital.repositories.TransaccionRepository;
 import co.edu.udea.bancodigital.repositories.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class TransferenciaService {
 
     private static final String ESTADO_CUENTA_ACTIVA = "ACTIVA";
@@ -163,7 +165,7 @@ public class TransferenciaService {
             mailService.sendAccountAlert(cuentaOrigen.getDueno().getCorreo(), mensaje);
         } catch (Exception e) {
             // Log error but don't fail the transaction
-            System.err.println("Error sending high transfer alert email: " + e.getMessage());
+            log.error("Error sending high transfer alert email", e);
         }
     }
 

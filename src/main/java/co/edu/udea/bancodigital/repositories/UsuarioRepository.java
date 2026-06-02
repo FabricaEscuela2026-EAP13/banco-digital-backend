@@ -40,11 +40,11 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UsuarioId> {
 	 * @return true si existe, false en caso contrario
 	 */
 	@Query("""
-	        SELECT
-				CASE WHEN COUNT(u) > 0
-					THEN true ELSE false END
-			FROM Usuario u
-			WHERE u.correo = :correo
+	SELECT
+	CASE WHEN COUNT(u) > 0
+	THEN true ELSE false END
+	FROM Usuario u
+	WHERE u.correo = :correo
 	        """)
 	boolean existsByCorreo(String correo);
 
@@ -55,10 +55,10 @@ public interface UsuarioRepository extends JpaRepository<Usuario, UsuarioId> {
 	 * @return lista de usuarios con el rol especificado
 	 */
 	@Query("""
-	        SELECT u
-			FROM Usuario u
-			WHERE u.rol = :rol
-	        """)
+	SELECT u
+	FROM Usuario u
+	WHERE u.rol = :rol
+	    """)
 	List<Usuario> findAllByRol(Rol rol);
 
 	/**

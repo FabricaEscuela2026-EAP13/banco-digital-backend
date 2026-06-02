@@ -78,7 +78,9 @@ public class ReporteGeneratorService {
     public byte[] generarCSV(CertificadoBancarioDTO certificado) {
         try {
             StringWriter sw = new StringWriter();
-            CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT.withHeader("Campo", "Valor"));
+            CSVPrinter printer = new CSVPrinter(sw, CSVFormat.DEFAULT.builder()
+                    .setHeader("Campo", "Valor")
+                    .build());
 
             printer.printRecord("Nombre del Cliente", certificado.getNombreCompleto());
             printer.printRecord("Fecha de Consulta", certificado.getFechaConsulta().format(DATE_FORMATTER));

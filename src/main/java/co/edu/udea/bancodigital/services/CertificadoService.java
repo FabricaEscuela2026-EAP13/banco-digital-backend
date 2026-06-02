@@ -56,7 +56,7 @@ public class CertificadoService {
             log.info("Reporte certificado bancario enviado exitosamente a: {}", usuario.getCorreo());
         } catch (Exception e) {
             log.error("Error enviando certificado por email a {}: {}", usuario.getCorreo(), e.getMessage(), e);
-            throw new RuntimeException("Error enviando certificado por email", e);
+            throw new IllegalArgumentException("Error enviando certificado por email", e);
         }
     }
 
