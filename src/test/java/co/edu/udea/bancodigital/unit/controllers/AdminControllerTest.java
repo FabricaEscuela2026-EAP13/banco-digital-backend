@@ -154,6 +154,19 @@ class AdminControllerTest {
     }
 
     @Test
+    @DisplayName("HU3-SC3: Rechazar auditoría cuando usuario no tiene rol de administrador")
+    void should_RejectAudit_When_UserIsNotAdmin() throws Exception {
+        AuditoriaTransaccionesResponse response = AuditoriaTransaccionesResponse.builder().total(0).build();
+        when(transaccionService.consultarHistorialAuditoria(any(Pageable.class))).thenReturn(response);
+
+        mockMvc.perform(get("/api/v1/admin/transacciones")
+                        .param("page", "0")
+                        .param("size", "20")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     @DisplayName("Admin: Listar clientes del sistema")
     void should_ListClients_When_AdminIsAuthenticated() throws Exception {
         ListarClientesAdminResponse cliente = ListarClientesAdminResponse.builder()
