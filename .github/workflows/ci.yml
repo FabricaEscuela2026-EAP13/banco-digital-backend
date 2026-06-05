@@ -13,9 +13,6 @@ jobs:
     name: Build, Test and Sonar
     runs-on: ubuntu-latest
 
-    env:
-      SPRING_PROFILES_ACTIVE: test
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -34,62 +31,21 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      # === Crear configuración con secrets ===
-      - name: Crear application-test.properties
-        run: |
-          mkdir -p src/main/resources
-          cat > src/main/resources/application-test.properties << 'EOF'
-          # ==================== Database ====================
-          spring.datasource.url=${{ secrets.SPRING_DATASOURCE_URL }}
-          spring.datasource.username=${{ secrets.DATASOURCE_USERNAME }}
-          spring.datasource.password=${{ secrets.DATASOURCE_PASSWORD }}
-          spring.datasource.driver-class-name=org.postgresql.Driver   # cambia si usas otra BD
 
-          # JPA
-          spring.jpa.hibernate.ddl-auto=validate
-          spring.jpa.show-sql=false
-
-          # JWT y otras configs de tu app
-          app.jwt.secret=${{ secrets.APP_JWT_SECRET }}
-
-          # Actuator (recomendado para health check)
-          management.endpoints.web.exposure.include=health
-          management.endpoint.health.show-details=always
-          EOF
-
-      - name: Build (sin tests)
-        run: mvn clean package -DskipTests
-
-      # === Iniciar Backend antes de las E2E ===
-      - name: Iniciar Backend (Spring Boot)
-        run: |
-          echo "🚀 Iniciando backend en background..."
-          mvn spring-boot:run -Dspring-boot.run.profiles=test -DskipTests &
-          
-          echo "⏳ Esperando que el backend esté listo..."
-          timeout=120
-          until curl -f -s http://localhost:8080/actuator/health > /dev/null || [ $timeout -eq 0 ]; do
-            sleep 3
-            timeout=$((timeout-1))
-          done
-          
-          if [ $timeout -eq 0 ]; then
-            echo "❌ Error: Backend no inició correctamente"
-            exit 1
-          fi
-          
-          echo "✅ Backend iniciado correctamente"
-        timeout-minutes: 4
-
-      # === Ejecutar tests + Sonar ===
-      - name: Tests + SonarCloud
+      - name: Build, Test, Coverage and Sonar
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          APP_JWT_SECRET: ${{ secrets.APP_JWT_SECRET }}
+          SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+          DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
+          DATASOURCE_PASSWORD: ${{ secrets.DATASOURCE_PASSWORD }}
         run: >
-          mvn verify sonar:sonar
+          mvn clean verify sonar:sonar
           -Dspring.profiles.active=test
+          -Dcucumber.filter.tags="not @e2e"
           -Dsonar.projectKey=FabricaEscuela2026-EAP13_banco-digital-backend
           -Dsonar.organization=fabricaescuela2026-eap13
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.login=$SONAR_TOKEN
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+

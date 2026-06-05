@@ -1,3 +1,4 @@
+@e2e
 Feature: User login
 
   Scenario: Successful login

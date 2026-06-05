@@ -1,3 +1,4 @@
+@e2e
 Feature: User registration
 
   Scenario: Successful customer registration

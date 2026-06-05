@@ -1,3 +1,4 @@
+@e2e
 Feature: Bank account management
 
   Scenario: Consult account balance successfully

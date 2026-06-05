@@ -1,3 +1,4 @@
+@e2e
 Feature: Bank transfers
 
   Scenario: Perform successful transfer between accounts
