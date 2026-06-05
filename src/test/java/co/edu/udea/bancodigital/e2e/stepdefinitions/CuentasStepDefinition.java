@@ -7,7 +7,6 @@ import net.serenitybdd.rest.SerenityRest;
 import co.edu.udea.bancodigital.e2e.tasks.IniciarSesion;
 import co.edu.udea.bancodigital.e2e.tasks.ConsultarSaldo;
 import co.edu.udea.bancodigital.e2e.questions.ElCodigoDeEstado;
-import org.junit.Assert;
 
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
