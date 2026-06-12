@@ -37,28 +37,28 @@ class RegistroRequestValidationTest {
     }
 
     @Test
-    @DisplayName("CP-REG-02: registro sin email debe ser invalido")
+    @DisplayName("Registro sin email debe ser invalido")
     void registroSinEmail_deberiaSerInvalido() {
         RegistroRequest request = registroRequestValido("Abc123#@");
         ReflectionTestUtils.setField(request, "correo", "");
 
         assertTieneViolacionEnCampo(validator.validate(request), "correo");
-        System.out.println("=== CP-REG-02 RESULTADO OBTENIDO ===");
+        System.out.println("===RESULTADO OBTENIDO ===");
         System.out.println("Error: " + validator.validate(request).iterator().next().getMessage());
     }
 
     @Test
-    @DisplayName("CP-REG-05: email con formato incorrecto debe ser invalido")
+    @DisplayName("Email con formato incorrecto debe ser invalido")
     void registroConEmailInvalido_deberiaSerInvalido() {
         RegistroRequest request = registroRequestValido("Abc123#@");
         ReflectionTestUtils.setField(request, "correo", "juan.gmail.com");
 
         assertTieneViolacionEnCampo(validator.validate(request), "correo");
-        System.out.println("=== CP-REG-05 RESULTADO OBTENIDO ===");
+        System.out.println("===RESULTADO OBTENIDO ===");
         System.out.println("Error: " + validator.validate(request).iterator().next().getMessage());
     }
 
-    @ParameterizedTest(name = "CP-REG-{0}: contrasena de {1} caracteres debe ser {2}")
+    @ParameterizedTest(name = "Contrasena de {1} caracteres debe ser {2}")
     @CsvSource({
         "07,7,invalida,Abc1#23",
         "08,8,valida,Abc123#@",
@@ -84,27 +84,27 @@ class RegistroRequestValidationTest {
     }
 
     @Test
-    @DisplayName("CP-REG-13: contrasena sin mayuscula debe ser invalida")
+    @DisplayName("Contrasena sin mayuscula debe ser invalida")
     void contrasenaSinMayuscula_deberiaSerInvalida() {
         RegistroRequest request = registroRequestValido("abc123#@");
 
         assertTieneViolacionEnCampo(validator.validate(request), "contrasena");
-        System.out.println("=== CP-REG-13 RESULTADO OBTENIDO ===");
+        System.out.println("=== RESULTADO OBTENIDO ===");
         System.out.println("Error: " + validator.validate(request).iterator().next().getMessage());
     }
 
     @Test
-    @DisplayName("CP-REG-14: contrasena sin simbolo debe ser invalida")
+    @DisplayName("Contrasena sin simbolo debe ser invalida")
     void contrasenaSinSimbolo_deberiaSerInvalida() {
         RegistroRequest request = registroRequestValido("Abc12345");
 
         assertTieneViolacionEnCampo(validator.validate(request), "contrasena");
-        System.out.println("=== CP-REG-14 RESULTADO OBTENIDO ===");
+        System.out.println("=== RESULTADO OBTENIDO ===");
         System.out.println("Error: " + validator.validate(request).iterator().next().getMessage());
     }
 
     @Test
-    @DisplayName("CP-UPD-02: email invalido en edicion debe ser invalido")
+    @DisplayName("Email invalido en edicion debe ser invalido")
     void actualizarDatosConEmailInvalido_deberiaSerInvalido() {
         ActualizarDatosRequest request = actualizarDatosRequestValido();
         ReflectionTestUtils.setField(request, "correo", "test.com");
@@ -115,7 +115,7 @@ class RegistroRequestValidationTest {
     }
 
     @Test
-    @DisplayName("CP-UPD-03: nombre vacio en edicion debe ser invalido")
+    @DisplayName("Nombre vacio en edicion debe ser invalido")
     void actualizarDatosConNombreVacio_deberiaSerInvalido() {
         ActualizarDatosRequest request = actualizarDatosRequestValido();
         ReflectionTestUtils.setField(request, "nombre", "");

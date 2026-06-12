@@ -54,7 +54,7 @@ class AdminServiceTest {
     private UsuarioService usuarioService;
 
     @Test
-    @DisplayName("CP-ADM-01: Consulta exitosa")
+    @DisplayName("Consulta exitosa")
     void listarClientes_deberiaMapearUsuariosCliente() {
         TipoDocumento tipoDocumento = mock(TipoDocumento.class);
         Rol rol = mock(Rol.class);
@@ -102,7 +102,7 @@ class AdminServiceTest {
     }
 
     @Test
-    @DisplayName("CP-ADM-02: Lista vacía")
+    @DisplayName("Lista vacía")
     void listarClientes_deberiaRetornarListaVacia() {
         when(usuarioRepository.findClientesConRol("CLIENTE"))
             .thenReturn(List.of());

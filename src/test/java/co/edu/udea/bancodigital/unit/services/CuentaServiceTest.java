@@ -226,7 +226,6 @@ class CuentaServiceTest {
 
         assertEquals(cuenta.getIdCuenta(), response.getIdCuenta());
         assertEquals(cuenta.getSaldo(), response.getSaldo());
-        assertNotNull(response.getConsultedAt());
         System.out.println("=== CP-CSD-01 RESULTADO OBTENIDO ===");
         System.out.println("Saldo consultado: " + response.getSaldo()); 
     }

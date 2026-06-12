@@ -11,7 +11,9 @@ import org.junit.platform.suite.api.Suite;
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("acceptance")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "co.edu.udea.bancodigital.acceptance")
-@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, summary")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, 
+    value = "co.edu.udea.bancodigital.acceptance")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, 
+    value = "pretty, html:target/cucumber-reports/report.html, json:target/cucumber-reports/cucumber.json")
 class CucumberAcceptanceTest {
 }

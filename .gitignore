@@ -32,6 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 
+### Kubernetes Secrets ###
+k8s/secret.yaml
+
 ### Credenciales y entorno ###
 .env
 *.env

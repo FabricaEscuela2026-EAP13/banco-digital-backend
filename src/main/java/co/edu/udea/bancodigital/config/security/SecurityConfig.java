@@ -89,14 +89,14 @@ public class SecurityConfig {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.exceptionHandling(exception -> exception
 						.authenticationEntryPoint(restAuthenticationEntryPoint))
-				.anonymous(anonym -> anonym.disable())
 				// Configura las autorizaciones
 				.authorizeHttpRequests(authz -> authz
 						// Rutas públicas - no requieren autenticación
 						.requestMatchers(HttpMethod.POST, "/api/v1/auth/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/api/v1/usuarios/registro").permitAll()
-						// Health checks para Render/Actuator
+						// Health checks y métricas para Actuator/Prometheus
 						.requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
+						.requestMatchers("/actuator/prometheus").permitAll()
 						// Swagger UI
 						.requestMatchers("/swagger", "/swagger/**", "/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**")
 						.permitAll()

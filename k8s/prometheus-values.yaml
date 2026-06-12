@@ -1,0 +1,26 @@
+grafana:
+  adminUser: admin
+  adminPassword: "admin123"
+  service:
+    type: LoadBalancer
+    port: 3000
+
+prometheus:
+  service:
+    type: LoadBalancer
+    port: 9090
+  prometheusSpec:
+    # Permite que Prometheus descubra ServiceMonitors en cualquier namespace
+    serviceMonitorSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorNamespaceSelector: {}
+
+# Deshabilitamos componentes extras para mantenerlo simple
+alertmanager:
+  enabled: false
+
+nodeExporter:
+  enabled: false
+
+kubeStateMetrics:
+  enabled: false

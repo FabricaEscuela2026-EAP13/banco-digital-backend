@@ -209,9 +209,40 @@
 			<version>1.10.0</version>
 		</dependency>
 	</dependencies>
-
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>3.5.5</version>
+			</plugin>
+		</plugins>
+	</reporting>
 	<build>
 		<plugins>
+
+			<plugin>
+				<groupId>net.masterthought</groupId>
+				<artifactId>maven-cucumber-reporting</artifactId>
+				<version>5.7.7</version>
+				<executions>
+					<execution>
+						<id>execution</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<projectName>BancoDigital</projectName>
+							<outputDirectory>target/cucumber-reports</outputDirectory>
+							<jsonFiles>
+								<param>target/cucumber-reports/cucumber.json</param>
+							</jsonFiles>
+							<checkBuildResult>false</checkBuildResult>  <!-- ← agrega esta línea -->
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

@@ -1,0 +1,8 @@
+target/
+.git/
+.gitignore
+.claude/
+.vscode/
+.idea/
+*.md
+k8s/
